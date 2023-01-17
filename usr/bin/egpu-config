@@ -1,0 +1,69 @@
+#! /bin/bash
+# This script swaps out X configurations between the built in GPU on the laptop and an eGPU configuration
+# The internal GPU is passed to the VFIO driver before boot so that programs to not attempt to use it
+
+function usage {
+	echo "egpu-config --enable  or -e  enables the eGPU configuration"
+	echo "egpu-config --disable or -d  disables the eGPU configuration"
+	echo "-h or --help displays this message"
+	echo "Note: egpu-config must be run as root"
+}
+
+if [[ $EUID -ne 0 ]]; then
+	echo "This script must be run as root"
+	exit 1
+fi
+
+if [[ $# -eq 0 ]]; then
+	usage
+	exit 1
+fi 
+
+if [[ $# -gt 1 ]]; then
+	usage
+	exit 1
+fi
+
+while [[ $# -gt 0 ]] 
+do
+args="$1"
+
+case $args in
+	-e|--enable)
+	ENABLE="true"
+        shift # past argument
+	shift # past value
+	;;
+        -d|--disable)
+	DISABLE="true"
+        shift # past argument
+        shift # past argument	
+        ;;
+        *) # Unknown option or help
+	USAGE="true"
+	shift # past argument
+	;;
+esac
+done
+
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+if [[ $ENABLE == "true" ]]; then
+    cp /etc/default/grub-3050-VFIO /etc/default/grub
+    mv /etc/X11/xorg.conf.d/10-nvidia-egpu.disabled /etc/X11/xorg.conf.d/10-nvidia-egpu.conf
+    mv /etc/X11/xorg.conf.d/10-nvidia-optimus.conf /etc/X11/xorg.conf.d/10-nvidia-optimus.disabled
+    update-grub
+fi
+
+if [[ $DISABLE == "true" ]]; then
+    cp /etc/default/grub.bak /etc/default/grub
+    mv /etc/X11/xorg.conf.d/10-nvidia-egpu.conf /etc/X11/xorg.conf.d/10-nvidia-egpu.disabled
+    mv /etc/X11/xorg.conf.d/10-nvidia-optimus.disabled /etc/X11/xorg.conf.d/10-nvidia-optimus.conf
+    update-grub
+fi
+
+if [[ $USAGE == "true" ]]; then
+	usage
+fi
+
+exit 0
