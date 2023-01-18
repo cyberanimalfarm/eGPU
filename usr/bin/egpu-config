@@ -49,6 +49,7 @@ done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
 if [[ $ENABLE == "true" ]]; then
+    cp /etc/default/grub /etc/default/grub.bak
     cp /etc/default/grub-3050-VFIO /etc/default/grub
     mv /etc/X11/xorg.conf.d/10-nvidia-egpu.disabled /etc/X11/xorg.conf.d/10-nvidia-egpu.conf
     mv /etc/X11/xorg.conf.d/10-nvidia-optimus.conf /etc/X11/xorg.conf.d/10-nvidia-optimus.disabled
