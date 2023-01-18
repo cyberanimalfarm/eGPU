@@ -75,7 +75,7 @@ Section "InputDevice"
     Option         "Device" "/dev/psaux"
     Option         "Emulate3Buttons" "no"
     Option         "ZAxisMapping" "4 5"
-EndSection
+EndSectionc
 
 Section "InputDevice"
     Identifier     "Keyboard0"
@@ -91,6 +91,20 @@ Section "ServerLayout"
     InputDevice   "Mouse0" "CorePointer"
 EndSection
 ```
+
+If event2 is not the correct device file for your keyboard, you can find the right keyboard file with:
+```shell
+cat /proc/bus/input/devices | grep -i "keyboard" -A5
+
+N: Name="AT Translated Set 2 keyboard"
+P: Phys=isa0060/serio0/input0
+S: Sysfs=/devices/platform/i8042/serio0/input/input2
+U: Uniq=
+H: Handlers=sysrq kbd event2 leds
+B: PROP=0
+```
+
+
 
 ---
 [nvidia-conf]: https://github.com/cyberanimalfarm/eGPU/blob/master/etc/modprobe.d/nvidia.conf
