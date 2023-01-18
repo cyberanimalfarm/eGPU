@@ -3,7 +3,7 @@
 This repo stores configuration files to use the Aorus RTX 3080 external GPU. The sample configuration files are located in the same directory structure 
 as they are found in Ubuntu 22.04 LTS. This configuration has been tested on the XPS 15 9510 but it can be adapted for other hardware.
 
-## Pre-Requisites
+## Pre-requisites
 
 This configuration is intended for use with the NVIDIA open kernel driver. 
 Currently version 515 is recommended for use. This can be installed with:
