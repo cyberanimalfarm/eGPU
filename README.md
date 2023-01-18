@@ -8,8 +8,6 @@ as they are found in Ubuntu 22.04 LTS. This configuration has been tested on the
 ### Thunderbolt Permissions
 Thunderbolt permissions must be enabled in both the Dell UEFI and in Linux to utilize the eGPU
 
-#### Dell UEFI
-
 #### Linux permissions
 Thunderbolt permissions in Ubuntu can be controlled through the boltctl utility. This is included with the bolt package that can be installed with:
 ```shell
@@ -35,6 +33,9 @@ To enroll the listed device you would use the following command:
 ```shell 
 sudo boltctl enroll 00663909-9af0-ed00-ffff-ffffffffffff
 ```
+#### Dell UEFI
+If the eGPU is not being listed in bolt, check the UEFI to ensure Thunderbolt permissions are enabled and look in your dmesg output for related messages.
+
 ### Driver install
 This configuration is intended for use with the NVIDIA open kernel driver. 
 Currently version 515 is recommended for use. This can be installed with:
