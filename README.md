@@ -15,7 +15,26 @@ Thunderbolt permissions in Ubuntu can be controlled through the boltctl utility.
 ```shell
 sudo apt install bolt
 ```
-
+Thunderbolt devices can be listed with boltctl list:
+```shell
+boltctl list
+ ○ GIGABYTE AORUS GAMING BOX
+   ├─ type:          peripheral
+   ├─ name:          AORUS GAMING BOX
+   ├─ vendor:        GIGABYTE
+   ├─ uuid:          00663909-9af0-ed00-ffff-ffffffffffff
+   ├─ generation:    Thunderbolt 3
+   ├─ status:        disconnected
+   ├─ authorized:    Tue 17 Jan 2023 10:20:53 PM UTC
+   ├─ connected:     Tue 17 Jan 2023 10:20:53 PM UTC
+   └─ stored:        Fri 06 Jan 2023 01:12:34 PM UTC
+      ├─ policy:     iommu
+      └─ key:        no
+```
+To enroll the listed device you would use the following command:
+```shell 
+sudo boltctl enroll 00663909-9af0-ed00-ffff-ffffffffffff
+```
 ### Driver install
 This configuration is intended for use with the NVIDIA open kernel driver. 
 Currently version 515 is recommended for use. This can be installed with:
