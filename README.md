@@ -43,7 +43,7 @@ This GPU should now be available for compute applications without further config
 
 To use the GPU for display output and 3D acceleration with applications, additional configuration is necessary.
 
-## X Configuartion
+## X Configuration
 
 The Xorg server should be configured using configuration files placed in the [/etc/X11/xorg.conf.d][xorg-conf] directory
 
