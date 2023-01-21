@@ -280,6 +280,8 @@ lspci -nn | grep -i 'vga\|3d'
 00:02.0 VGA compatible controller [0300]: Intel Corporation TigerLake-H GT1 [UHD Graphics] [8086:9a60] (rev 01)
 01:00.0 3D controller [0302]: NVIDIA Corporation GA107M [GeForce RTX 3050 Ti Mobile] [10de:25a0] (rev a1)
 ```
+### WARNING: If you plug the eGPU in to a different Thunderbolt port than you configured X to use, then it will receive a different address and break your config because X will not be able to find any screens when it starts.
+
 Finally, to automate switching back and forth between using the eGPU as a docking station that renders to external displays, and using my Laptop with integrated NVIDIA graphics, I created the [egpu-config script][egpu-script]:
 ```shell
 #! /bin/bash
